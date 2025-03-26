@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Samhitha Bobba - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            /* Dark Theme (Default) */
+            --primary-color: #0e76a8;
+            --secondary-color: #4db5ff;
+            --bg-color: #1f1f38;
+            --bg-variant: #2c2c6c;
+            --text-color: #fff;
+
+            /* Light Theme Variables (will be applied when .light-theme class is added) */
+            --light-primary-color: #0e76a8;
+            --light-secondary-color: #0e76a8;
+            --light-bg-color: #f9f9f9;
+            --light-bg-variant: #e6e6e6;
+            --light-text-color: #333;
+        }
+
+        .light-theme {
+            --primary-color: var(--light-primary-color);
+            --secondary-color: var(--light-secondary-color);
+            --bg-color: var(--light-bg-color);
+            --bg-variant: var(--light-bg-variant);
+            --text-color: var(--light-text-color);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .summary {
+            color: var(--text-color);
+            opacity: 0.9;
+            max-width: 600px;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        /* Skills Tags */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .skill-tag {
+            background-color: rgba(77, 181, 255, 0.1);
+            color: var(--secondary-color);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(77, 181, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background-color: rgba(77, 181, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Experience Card Styles */
+        .experience-date {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-title {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 100;
+            cursor: pointer;
+            background: var(--bg-variant);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--secondary-color);
+        }
+
+        /* Header Styles */
+        header {
+            height: 100vh;
+            padding-top: 3rem;
+            overflow: hidden;
+        }
+
+        .header-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            width: max-content;
+            padding: 0.7rem 1.7rem;
+            border-radius: 3rem;
+            backdrop-filter: blur(15px);
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .light-theme nav {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            background: transparent;
+            padding: 0.9rem;
+            border-radius: 50%;
+            display: flex;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        nav a.active {
+            background: var(--bg-variant);
+            color: var(--secondary-color);
+        }
+
+        /* Profile Section */
+        .profile {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            width: 100%;
+        }
+
+        .profile-content {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 500px;
+            order: 1; /* Comes first */
+        }
+
+        .profile-image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            order: 2; /* Comes second (on right) */
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 280px; /* Oval shape */
+            border-radius: 50% / 35%; /* Creates oval shape */
+            overflow: hidden;
+            border: 2px solid var(--secondary-color);
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50% / 35%; /* Matches container */
+        }
+
+        .profile h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile h5 {
+            color: var(--secondary-color);
+            font-weight: 400;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dynamic-text {
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            background-color: var(--secondary-color);
+            margin-left: 2px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .cta {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            width: max-content;
+            padding: 0.75rem 1.2rem;
+            border-radius: 0.4rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0.5rem;
+            border: none;
+        }
+
+        .btn-primary, .btn-outline, .btn-schedule {
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+            color: var(--text-color);
+            border: 1px solid transparent;
+        }
+
+        .btn-primary:hover, .btn-outline:hover, .btn-schedule:hover {
+            background: transparent;
+            color: #8f94fb;
+            border: 1px solid #4e54c8;
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 0;
+        }
+
+        section > h2 {
+            text-align: center;
+            color: var(--secondary-color);
+            margin-bottom: 3rem;
+            font-size: 2rem;
+        }
+
+        /* About Section */
+        .about-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .about-card {
+            background: var(--bg-variant);
+            border: 1px solid transparent;
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .about-card:hover {
+            background: transparent;
+            border-color: var(--secondary-color);
+            cursor: default;
+        }
+
+        .about-icon {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-card h5 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-card small {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+        
+        .about-me-content {
+            text-align: left;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto 3rem auto;
+            background: var(--bg-variant);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .about-me-content:hover {
+            background: transparent;
+            border-color: var(--secondary-color);
+        }
+        
+        .about-me-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .about-me-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Experience Section */
+        .experience-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .experience-card {
+            background: var(--bg-variant);
+            padding: 2.4rem;
+            border-radius: 1rem;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .experience-card:hover {
+            background: transparent;
+            border-color: var(--secondary-color);
+            cursor: default;
+        }
+
+        .experience-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .experience-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            row-gap: 2rem;
+        }
+
+        .experience-details {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .experience-icon {
+            color: var(--secondary-color);
+            margin-top: 6px;
+            font-size: 1.2rem;
+        }
+
+        /* Education Section */
+        .education-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .education-card {
+            background: var(--bg-variant);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .education-card:hover {
+            background: transparent;
+            border-color: var(--secondary-color);
+        }
+
+        .education-card h4 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .education-card h5 {
+            margin-bottom: 0.5rem;
+        }
+
+        .education-card small {
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .education-detail {
+            color: var(--secondary-color);
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Certification Styles */
+        .certification-icon {
+            color: var(--secondary-color);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Make certifications grid more compact */
+        .certifications-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .certification-card {
+            background: var(--bg-variant);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .certification-card:hover {
+            background: transparent;
+            border-color: var(--secondary-color);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-option {
+            background: var(--bg-variant);
+            padding: 1.2rem;
+            border-radius: 1.2rem;
+            text-align: center;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .contact-option:hover {
+            background: transparent;
+            border-color: var(--secondary-color);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .contact-option h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-option a {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-top: 0.5rem;
+            text-decoration: none;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            background: transparent;
+            border: 2px solid var(--bg-variant);
+            resize: none;
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-variant);
+            padding: 3rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 7rem;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-social {
+            background: var(--bg-color);
+            color: var(--text-color);
+            padding: 0.8rem;
+            border-radius: 0.7rem;
+            display: flex;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-social:hover {
+            background: transparent;
+            color: var(--secondary-color);
+            border-color: var(--bg-color);
+        }
+
+        .footer-copyright {
+            margin-bottom: 4rem;
+            color: var(--text-color);
+            opacity: 0.6;
+        }
+
+        /* Media Queries */
+        @media screen and (max-width: 1024px) {
+            .container {
+                width: 90%;
+            }
+
+            section {
+                margin-top: 6rem;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .profile {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+
+            .profile-content {
+                text-align: center;
+                order: 2; /* On mobile, text comes after image */
+            }
+
+            .profile-image-container {
+                order: 1; /* On mobile, image comes first */
+            }
+
+            .cta {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            header {
+                height: 100vh;
+            }
+
+            .profile h1 {
+                font-size: 2rem;
+            }
+
+            .profile h5 {
+                font-size: 1rem;
+            }
+
+            .about-container, 
+            .experience-container, 
+            .certifications-container,
+            .education-container, 
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-content {
+                grid-template-columns: 1fr;
+            }
+
+            .certifications-container, 
+            .education-container {
+                gap: 1rem;
+            }
+
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle Button -->
+    <div class="theme-toggle" id="theme-toggle">
+        <i class="fas fa-sun"></i>
+    </div>
+
+    <!-- Header -->
+    <header id="home">
+        <div class="container header-container">
+            <div class="profile">
+                <div class="profile-content">
+                    <h1>Sri Samhitha Bobba</h1>
+                    <h5>I'm <span class="dynamic-text" id="dynamic-text">Software Engineer</span><span class="cursor">|</span></h5>
+                    <p class="summary">Software Engineer with expertise in DevOps, specializing in managing Kubernetes clusters, designing CI/CD pipelines, and automating workflows using tools like Terraform, Ansible, and Jenkins.</p>
+                    <div class="cta">
+                        <a href="resume.html" class="btn btn-primary" target="_blank">View Resume</a>
+                        <a href="#contact" class="btn btn-outline">Contact Me</a>
+                        <a href="https://calendly.com/sribobba9/30min" class="btn btn-schedule" target="_blank">Schedule Meeting</a>
+                    </div>
+                </div>
+                <div class="profile-image-container">
+                    <div class="profile-image">
+                        <img src="./samhithabobba_headshort.jpeg" alt="Sri Samhitha Bobba">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#home" class="active" id="home-nav"><i class="fas fa-home"></i></a>
+        <a href="#about" id="about-nav"><i class="fas fa-user"></i></a>
+        <a href="#skills" id="skills-nav"><i class="fas fa-cogs"></i></a>
+        <a href="#experience" id="experience-nav"><i class="fas fa-briefcase"></i></a>
+        <a href="#education" id="education-nav"><i class="fas fa-graduation-cap"></i></a>
+        <a href="#certifications" id="certifications-nav"><i class="fas fa-certificate"></i></a>
+        <a href="#contact" id="contact-nav"><i class="fas fa-envelope"></i></a>
+    </nav>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-me-content">
+                <p>I am a passionate Software Engineer with expertise in DevOps and a strong foundation in both frontend and backend technologies. My experience spans across managing Kubernetes clusters, designing CI/CD pipelines, and automating workflows using tools like Terraform, Ansible, and Jenkins.</p>
+                <p>I enjoy solving complex technical challenges and continuously learning new technologies. My background in computer science combined with practical industry experience allows me to approach problems with both theoretical knowledge and practical solutions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2>My Skills</h2>
+            <div class="about-container">
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h5>Programming</h5>
+                    <div class="skills-container">
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">C</span>
+                        <span class="skill-tag">Dart</span>
+                        <span class="skill-tag">R</span>
+                    </div>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h5>Front-End</h5>
+                    <div class="skills-container">
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">JavaScript</span>
+                    </div>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h5>DevOps</h5>
+                    <div class="skills-container">
+                        <span class="skill-tag">Jenkins</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Azure</span>
+                        <span class="skill-tag">Terraform</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-container" style="margin-top: 20px;">
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h5>Databases</h5>
+                    <div class="skills-container">
+                        <span class="skill-tag">MySQL</span>
+                    </div>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h5>Other Tools</h5>
+                    <div class="skills-container">
+                        <span class="skill-tag">Jira</span>
+                        <span class="skill-tag">Selenium</span>
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">Linux</span>
+                    </div>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h5>Key Capabilities</h5>
+                    <div class="skills-container">
+                        <span class="skill-tag">Data Analytics</span>
+                        <span class="skill-tag">GitHub</span>
+                        <span class="skill-tag">CI/CD</span>
+                        <span class="skill-tag">Agile</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2>My Experience</h2>
+            <div class="experience-container">
+                <div class="experience-card">
+                    <h3>Wipro Limited</h3>
+                    <p class="experience-date">May 2022 - Jul 2023</p>
+                    <h4 class="experience-title">Software Engineer</h4>
+                    <div class="experience-content">
+                        <div class="experience-details">
+                            <div class="experience-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <p>Led deployment phase of Ericsson Centralized Self-Organizing Network (ECSON)</p>
+                            </div>
+                        </div>
+                        <div class="experience-details">
+                            <div class="experience-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <p>Managed three-tier deployment process, achieving 80% increase in efficiency</p>
+                            </div>
+                        </div>
+                        <div class="experience-details">
+                            <div class="experience-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <p>Implemented DevOps practices, CI/CD pipelines with Kubernetes and Jenkins</p>
+                            </div>
+                        </div>
+                        <div class="experience-details">
+                            <div class="experience-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <p>Automated manual processes with Python, reducing deployment times by 89%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="experience-card">
+                    <h3>Software Project Intern</h3>
+                    <p class="experience-date">Feb 2022 - Apr 2022</p>
+                    <div class="experience-content">
+                        <div class="experience-details">
+                            <div class="experience-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <p>Designed and developed a web-based food ordering system</p>
+                            </div>
+                        </div>
+                        <div class="experience-details">
+                            <div class="experience-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <p>Integrated testing with JUnit for robust backend operations</p>
+                            </div>
+                        </div>
+                        <div class="experience-details">
+                            <div class="experience-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <p>Created responsive frontend with HTML, CSS and efficient database with SQL</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <div class="container">
+            <h2>My Education</h2>
+            <div class="education-container">
+                <div class="education-card">
+                    <h5>Master of Computer Science</h5>
+                    <small>Illinois Institute of Technology, Chicago</small>
+                    <p class="education-detail">GPA: 3.50/4.0</p>
+                </div>
+                <div class="education-card">
+                    <h5>Bachelor of Technology in Computer Science and Engineering</h5>
+                    <small>Vel Tech University, Chennai</small>
+                    <p class="education-detail">GPA: 3.45/4.0</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications">
+        <div class="container">
+            <h2>My Certifications</h2>
+            <div class="certifications-container">
+                <div class="certification-card">
+                    <div class="certification-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h5>Orchestrator for RPA Developers</h5>
+                    <small>Level 1 and Level 2 UI path (Diploma of Completion)</small>
+                </div>
+                <div class="certification-card">
+                    <div class="certification-icon">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h5>PCAP: Programming Essentials in Python</h5>
+                    <small>Cisco</small>
+                </div>
+                <div class="certification-card">
+                    <div class="certification-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h5>Analytics Certification</h5>
+                    <small>Google</small>
+                </div>
+                <div class="certification-card">
+                    <div class="certification-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h5>Data Science Ethics</h5>
+                    <small>University of Michigan</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <div class="contact-container">
+                <div class="contact-options">
+                    <div class="contact-option">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h4>Email</h4>
+                        <h5>sribobba9@gmail.com</h5>
+                        <a href="mailto:sribobba9@gmail.com">Send a message</a>
+                    </div>
+                    <div class="contact-option">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <h4>LinkedIn</h4>
+                        <h5>Sri Samhitha Bobba</h5>
+                        <a href="https://www.linkedin.com/in/sri-samhitha-bobba/" target="_blank">Connect on LinkedIn</a>
+                    </div>
+                    <div class="contact-option">
+                        <div class="contact-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h4>Schedule Meeting</h4>
+                        <h5>Available for virtual meetings</h5>
+                        <a href="https://calendly.com/sribobba9/30min" target="_blank">Book a time slot</a>
+                    </div>
+                </div>
+                <form id="contact-form">
+                    <input type="text" name="name" placeholder="Your Full Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" rows="7" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-socials">
+            <a href="https://www.linkedin.com/in/sri-samhitha-bobba/" class="footer-social" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/samhithaBobba" class="footer-social" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="#" class="footer-social" target="_blank"><i class="fab fa-twitter"></i></a>
+        </div>
+        <div class="footer-copyright">
+            <small>&copy; Sri Samhitha Bobba. All rights reserved.</small>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            
+            // Change icon based on theme
+            if (document.body.classList.contains('light-theme')) {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        });
+        
+        // Dynamic text animation (typewriter effect)
+        const dynamicText = document.getElementById('dynamic-text');
+        const roles = ["Software Engineer", "Data Enthusiast", "Automation Engineer (RPA)"];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingDelay = 100; // Delay between each character typing
+        let deletingDelay = 50; // Faster when deleting
+        let newRoleDelay = 2000; // Delay before typing a new role
+        
+        function typeEffect() {
+            const currentRole = roles[roleIndex];
+            
+            if (isDeleting) {
+                // Remove a character
+                dynamicText.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+                typingDelay = deletingDelay;
+            } else {
+                // Add a character
+                dynamicText.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+                typingDelay = 100;
+            }
+            
+            // If finished typing the current role
+            if (!isDeleting && charIndex === currentRole.length) {
+                // Pause at the end before deleting
+                typingDelay = newRoleDelay;
+                isDeleting = true;
+            } 
+            // If finished deleting the current role
+            else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length; // Move to next role
+            }
+            
+            setTimeout(typeEffect, typingDelay);
+        }
+        
+        // Start the typing effect when page loads
+        window.addEventListener('load', typeEffect);
+
+        // Navigation active link handler
+        const navLinks = document.querySelectorAll('nav a');
+        
+        // Function to set active link based on section in view
+        const setActiveLink = () => {
+            let scrollPosition = window.scrollY;
+            
+            // Get all sections
+            const sections = document.querySelectorAll('section');
+            const header = document.querySelector('header');
+            
+            // Check if we're at the top (home section)
+            if (scrollPosition < header.offsetHeight - 100) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                document.getElementById('home-nav').classList.add('active');
+                return;
+            }
+            
+            // Check each section's position
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                    const id = section.getAttribute('id');
+                    
+                    // Remove active class from all links
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    
+                    // Add active class to current section's link
+                    document.getElementById(`${id}-nav`).classList.add('active');
+                }
+            });
+        };
+        
+        // Listen for scroll events
+        window.addEventListener('scroll', setActiveLink);
+        
+        // Add click event listeners to nav links
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Get the target section id from the href
+                const targetId = this.getAttribute('href');
+                
+                // Scroll to the target section smoothly
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Update active class
+                navLinks.forEach(link => link.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Contact form functionality
+        const contactForm = document.getElementById('contact-form');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = this.elements['name'].value;
+            const email = this.elements['email'].value;
+            const message = this.elements['message'].value;
+            
+            // Create mailto link
+            const mailtoLink = `mailto:sribobba9@gmail.com?subject=Portfolio Contact from ${name}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Reset form
+            this.reset();
+            
+            // Show alert
+            alert('Opening your email client to send the message.');
+        });
+    </script>
+</body>
+</html>
